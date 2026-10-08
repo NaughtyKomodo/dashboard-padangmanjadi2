@@ -935,7 +935,7 @@
         <div class="brand-tagline">MIB EXHIBITION · PADANG MANJADI</div>
       </div>
       <div class="header-actions">
-        <div class="badge-black">39 Unit Competitor Records</div>
+        <div class="badge-black" id="header-total-badge">- Unit Competitor Records</div>
         <button class="neo-btn neo-btn-primary" onclick="window.print()">
           <i data-lucide="printer" style="width: 15px; height: 15px;"></i> Print / PDF
         </button>
@@ -968,7 +968,7 @@
           <span class="kpi-label">Total Temuan MIB</span>
           <div class="kpi-icon-box"><i data-lucide="truck" style="width: 18px; height: 18px;"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-total-records">39 Temuan</div>
+        <div class="kpi-value" id="kpi-total-records">-</div>
         <div class="kpi-subtext">
           <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i> Database unit kompetitor
         </div>
@@ -979,9 +979,9 @@
           <span class="kpi-label">Top Competitor Brand</span>
           <div class="kpi-icon-box"><i data-lucide="flame" style="width: 18px; height: 18px;"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-top-brand">Hitachi & SANY</div>
+        <div class="kpi-value" id="kpi-top-brand">-</div>
         <div class="kpi-subtext">
-          <span class="badge-pill" style="padding: 2px 8px; font-size: 0.72rem;" id="kpi-top-brand-sub">8 Unit Masing-Masing</span>
+          <span class="badge-pill" style="padding: 2px 8px; font-size: 0.72rem;" id="kpi-top-brand-sub">-</span>
         </div>
       </div>
 
@@ -990,9 +990,9 @@
           <span class="kpi-label">Sektor Dominan</span>
           <div class="kpi-icon-box"><i data-lucide="hard-hat" style="width: 18px; height: 18px;"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-top-sector" style="color: #3730A3;">CONS (48.7%)</div>
+        <div class="kpi-value" id="kpi-top-sector" style="color: #3730A3;">-</div>
         <div class="kpi-subtext">
-          <span class="sector-badge sector-CONS">19 Konstruksi</span>
+          <span class="sector-badge sector-CONS" id="kpi-top-sector-sub">-</span>
         </div>
       </div>
 
@@ -1001,7 +1001,7 @@
           <span class="kpi-label">Wilayah Terpantau</span>
           <div class="kpi-icon-box"><i data-lucide="map-pin" style="width: 18px; height: 18px;"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-total-areas">9 Area</div>
+        <div class="kpi-value" id="kpi-total-areas">-</div>
         <div class="kpi-subtext">
           <i data-lucide="navigation" style="width: 15px; height: 15px;"></i> Padang, Dharmasraya, Solok+
         </div>
@@ -1025,19 +1025,19 @@
       <div class="spotlight-grid">
         <div class="spotlight-metric">
           <div class="spotlight-metric-label">Wilayah Tertinggi</div>
-          <div class="spotlight-metric-val" id="spotlight-top-area">Padang (10 Temuan)</div>
+          <div class="spotlight-metric-val" id="spotlight-top-area">-</div>
         </div>
         <div class="spotlight-metric">
           <div class="spotlight-metric-label">Unit Mining (MNG)</div>
-          <div class="spotlight-metric-val" id="spotlight-mng-count">12 Unit (30.8%)</div>
+          <div class="spotlight-metric-val" id="spotlight-mng-count">-</div>
         </div>
         <div class="spotlight-metric">
           <div class="spotlight-metric-label">Unit Agriculture (AGR)</div>
-          <div class="spotlight-metric-val" id="spotlight-agr-count">8 Unit (20.5%)</div>
+          <div class="spotlight-metric-val" id="spotlight-agr-count">-</div>
         </div>
         <div class="spotlight-metric">
           <div class="spotlight-metric-label">Total Foto Dokumentasi</div>
-          <div class="spotlight-metric-val" id="spotlight-photo-count" style="color: #047857;">61 Link Bukti</div>
+          <div class="spotlight-metric-val" id="spotlight-photo-count" style="color: #047857;">-</div>
         </div>
       </div>
     </div>
@@ -1249,6 +1249,7 @@
 
     function initKPIOverview() {
       const total = RAW_DATA.length;
+      document.getElementById('header-total-badge').innerText = `${total} Unit Competitor Records`;
       document.getElementById('kpi-total-records').innerText = `${total} Temuan`;
 
       // Brand counts
@@ -1274,8 +1275,15 @@
       }
 
       // Top Sector
-      const consPct = ((sectorCounts.CONS / total) * 100).toFixed(1);
-      document.getElementById('kpi-top-sector').innerText = `CONS (${consPct}%)`;
+      const sortedSectors = Object.entries(sectorCounts).sort((a, b) => b[1] - a[1]);
+      if (sortedSectors.length > 0) {
+        const topSectorName = sortedSectors[0][0];
+        const topSectorCount = sortedSectors[0][1];
+        const topSectorPct = total > 0 ? ((topSectorCount / total) * 100).toFixed(1) : 0;
+        document.getElementById('kpi-top-sector').innerText = `${topSectorName} (${topSectorPct}%)`;
+        document.getElementById('kpi-top-sector-sub').innerText = `${topSectorCount} Temuan (${topSectorName})`;
+        document.getElementById('kpi-top-sector-sub').className = `sector-badge sector-${topSectorName}`;
+      }
 
       // Total areas
       document.getElementById('kpi-total-areas').innerText = `${Object.keys(areaCounts).length} Area`;
