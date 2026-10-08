@@ -882,9 +882,9 @@
       transform: translateY(-2px);
     }
 
-    /* Swipe hint badge & arrow controls */
+    /* Swipe hint badge & arrow controls (Mobile Only) */
     .carousel-nav-group {
-      display: none;
+      display: none !important; /* hidden by default on desktop */
       align-items: center;
       gap: 8px;
     }
@@ -965,6 +965,14 @@
       .neo-input {
         width: 100%;
         min-width: 100%;
+      }
+
+      /* Show swipe navigation controls on mobile when cards active */
+      body.mode-cards-active #carousel-nav-controls {
+        display: flex !important;
+        width: 100%;
+        justify-content: space-between;
+        margin-top: 8px;
       }
 
       /* Horizontal Scrollable Cards on Mobile */
@@ -1200,10 +1208,10 @@
       <div class="tab-group">
         <div class="tab-btn-wrapper">
           <button class="tab-btn active" id="tab-table-view" onclick="switchView('table')">
-            <i data-lucide="table" style="width: 16px; height: 16px;"></i> Mode Tabel Rinci
+            <i data-lucide="table" style="width: 16px; height: 16px;"></i> Mode Tabel
           </button>
           <button class="tab-btn" id="tab-cards-view" onclick="switchView('cards')">
-            <i data-lucide="grid" style="width: 16px; height: 16px;"></i> Mode Kartu & Preview Drive
+            <i data-lucide="grid" style="width: 16px; height: 16px;"></i> Mode Kartu
           </button>
         </div>
 
@@ -1212,12 +1220,14 @@
             <i data-lucide="hand" style="width: 14px; height: 14px;"></i>
             <span>Geser Kanan/Kiri ↔ (Auto-Scroll Aktif)</span>
           </div>
-          <button class="carousel-arrow-btn" onclick="scrollCarousel(-1)" title="Geser ke Kiri">
-            <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
-          </button>
-          <button class="carousel-arrow-btn" onclick="scrollCarousel(1)" title="Geser ke Kanan">
-            <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
-          </button>
+          <div style="display: flex; gap: 6px;">
+            <button class="carousel-arrow-btn" onclick="scrollCarousel(-1)" title="Geser ke Kiri">
+              <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
+            </button>
+            <button class="carousel-arrow-btn" onclick="scrollCarousel(1)" title="Geser ke Kanan">
+              <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -1746,17 +1756,17 @@
       if (view === 'table') {
         tblBtn.classList.add('active');
         crdBtn.classList.remove('active');
+        document.body.classList.remove('mode-cards-active');
         tblContainer.style.display = 'block';
         crdContainer.style.display = 'none';
-        if (navControls) navControls.style.display = 'none';
         stopAutoScroll();
         renderTable();
       } else {
         crdBtn.classList.add('active');
         tblBtn.classList.remove('active');
+        document.body.classList.add('mode-cards-active');
         tblContainer.style.display = 'none';
         crdContainer.style.display = ''; // let CSS handle grid vs flex on mobile
-        if (navControls) navControls.style.display = 'flex';
         renderCards();
 
         // Attach touch & mouse interaction listeners to pause auto-scroll
