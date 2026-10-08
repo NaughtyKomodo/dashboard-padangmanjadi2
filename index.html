@@ -1,0 +1,1668 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UT Padang Manjadi - Market Intelligence & Competitor Exhibition Dashboard</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <style>
+    :root {
+      /* Palette: United Tractors Iconic Yellow & Neo-Brutalism */
+      --ut-yellow: #FFD000;
+      --ut-yellow-light: #FFF275;
+      --ut-yellow-soft: #FFFBE6;
+      --bg-canvas: #F8F9FA;
+      --card-bg: #FFFFFF;
+      --text-black: #111827;
+      --border-black: #111827;
+      
+      /* Neo Brutalism styling tokens */
+      --neo-border: 2.5px solid #111827;
+      --neo-border-sm: 1.5px solid #111827;
+      --neo-shadow: 4px 4px 0px #111827;
+      --neo-shadow-sm: 2px 2px 0px #111827;
+      --neo-shadow-lg: 6px 6px 0px #111827;
+      --neo-shadow-active: 1px 1px 0px #111827;
+
+      /* Sector badge colors */
+      --sector-cons-bg: #E0E7FF;
+      --sector-cons-text: #3730A3;
+      --sector-mng-bg: #FEE2E2;
+      --sector-mng-text: #991B1B;
+      --sector-agr-bg: #DCFCE7;
+      --sector-agr-text: #166534;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-canvas);
+      background-image: radial-gradient(#d1d5db 1px, transparent 1px);
+      background-size: 24px 24px;
+      color: var(--text-black);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation Header */
+    header {
+      background-color: var(--ut-yellow);
+      border-bottom: var(--neo-border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      width: 100%;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    }
+
+    .header-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-logo-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .brand-box {
+      background: #FFFFFF;
+      border: var(--neo-border-sm);
+      padding: 6px 12px;
+      font-weight: 900;
+      font-size: 1.05rem;
+      letter-spacing: -0.3px;
+      box-shadow: var(--neo-shadow-sm);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-tagline {
+      font-size: 0.78rem;
+      font-weight: 800;
+      background: #111827;
+      color: var(--ut-yellow);
+      padding: 6px 12px;
+      border: var(--neo-border-sm);
+      box-shadow: 2px 2px 0px #FFFFFF;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .neo-btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 800;
+      font-size: 0.82rem;
+      background: #FFFFFF;
+      border: var(--neo-border-sm);
+      box-shadow: var(--neo-shadow-sm);
+      padding: 7px 16px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.12s ease;
+      text-decoration: none;
+      color: #111827;
+      user-select: none;
+      border-radius: 4px;
+    }
+
+    .neo-btn:hover {
+      background: var(--ut-yellow);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0px #111827;
+    }
+
+    .neo-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #111827;
+    }
+
+    .neo-btn-primary {
+      background: #FFFFFF;
+      border: var(--neo-border-sm);
+      box-shadow: 2.5px 2.5px 0px #111827;
+    }
+
+    .badge-black {
+      background: #111827;
+      color: #FFF;
+      border: var(--neo-border-sm);
+      box-shadow: 2px 2px 0 var(--ut-yellow);
+      padding: 6px 12px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      text-transform: uppercase;
+      border-radius: 4px;
+      letter-spacing: 0.4px;
+    }
+
+    .badge-pill {
+      background: var(--ut-yellow);
+      border: var(--neo-border-sm);
+      box-shadow: 2px 2px 0 #111827;
+      padding: 4px 10px;
+      font-weight: 800;
+      font-size: 0.74rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 4px;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 24px 60px 24px;
+    }
+
+    /* Hero Banner */
+    .hero-banner {
+      background: #FFFFFF;
+      border: var(--neo-border);
+      box-shadow: var(--neo-shadow-lg);
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .hero-stripes {
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      width: 180px;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--ut-yellow),
+        var(--ut-yellow) 14px,
+        #111827 14px,
+        #111827 28px
+      );
+      opacity: 0.95;
+      border-left: var(--neo-border);
+      display: none;
+    }
+
+    @media (min-width: 960px) {
+      .hero-stripes { display: block; }
+    }
+
+    .hero-content {
+      max-width: 920px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .hero-title {
+      font-size: 2.1rem;
+      font-weight: 900;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      color: #111827;
+    }
+
+    .hero-subtitle {
+      font-size: 0.96rem;
+      font-weight: 600;
+      color: #4B5563;
+      line-height: 1.6;
+    }
+
+    /* 4-Col KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    @media (max-width: 1080px) {
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 600px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+    }
+
+    .kpi-card {
+      background: #FFFFFF;
+      border: var(--neo-border);
+      box-shadow: var(--neo-shadow);
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 135px;
+      border-radius: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--neo-shadow-lg);
+    }
+
+    .kpi-card.highlight {
+      background: var(--ut-yellow);
+    }
+
+    .kpi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .kpi-label {
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #374151;
+    }
+
+    .kpi-icon-box {
+      width: 36px;
+      height: 36px;
+      background: #FFF;
+      border: var(--neo-border-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 2px 2px 0 #111827;
+      border-radius: 4px;
+    }
+
+    .kpi-card.highlight .kpi-icon-box {
+      background: #111827;
+      color: var(--ut-yellow);
+      box-shadow: 2px 2px 0 #FFF;
+    }
+
+    .kpi-value {
+      font-size: 1.85rem;
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+      color: #111827;
+    }
+
+    .kpi-subtext {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #4B5563;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Spotlight Card */
+    .spotlight-card {
+      background: var(--ut-yellow);
+      border: var(--neo-border);
+      box-shadow: var(--neo-shadow-lg);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .spotlight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 18px;
+      width: 100%;
+    }
+
+    @media (max-width: 960px) {
+      .spotlight-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 520px) {
+      .spotlight-grid { grid-template-columns: 1fr; }
+    }
+
+    .spotlight-metric {
+      background: #FFFFFF;
+      border: var(--neo-border-sm);
+      box-shadow: var(--neo-shadow-sm);
+      padding: 16px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 4px;
+    }
+
+    .spotlight-metric-label {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: #6B7280;
+      margin-bottom: 4px;
+      letter-spacing: 0.4px;
+    }
+
+    .spotlight-metric-val {
+      font-size: 1.38rem;
+      font-weight: 900;
+      color: #111827;
+    }
+
+    /* 2-Column Equal Charts Grid */
+    .grid-2col-equal {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 20px;
+      margin-bottom: 24px;
+      width: 100%;
+    }
+
+    @media (max-width: 1024px) {
+      .grid-2col-equal {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Neo Panel */
+    .neo-panel {
+      background: #FFFFFF;
+      border: var(--neo-border);
+      box-shadow: var(--neo-shadow);
+      padding: 24px;
+      margin-bottom: 24px;
+      width: 100%;
+      border-radius: 6px;
+    }
+
+    .panel-title-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+      border-bottom: var(--neo-border-sm);
+      padding-bottom: 14px;
+    }
+
+    .panel-title {
+      font-size: 1.18rem;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-transform: uppercase;
+      color: #111827;
+      letter-spacing: -0.3px;
+    }
+
+    /* Filter Controls */
+    .filter-group {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .neo-select, .neo-input {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.82rem;
+      background: #FFFFFF;
+      border: var(--neo-border-sm);
+      padding: 8px 14px;
+      box-shadow: var(--neo-shadow-sm);
+      outline: none;
+      cursor: pointer;
+      transition: all 0.12s ease;
+      border-radius: 4px;
+      color: #111827;
+    }
+
+    .neo-input {
+      cursor: text;
+      min-width: 240px;
+    }
+
+    .neo-select:hover, .neo-input:hover {
+      background: var(--ut-yellow-soft);
+      box-shadow: 3px 3px 0 #111827;
+      transform: translate(-1px, -1px);
+    }
+
+    .neo-select:focus, .neo-input:focus {
+      background: #FFFFFF;
+      border-color: #111827;
+      box-shadow: 3px 3px 0 var(--ut-yellow);
+    }
+
+    /* Tables */
+    .table-responsive {
+      overflow-x: auto;
+      border: var(--neo-border);
+      background: #FFF;
+      box-shadow: var(--neo-shadow-sm);
+      border-radius: 4px;
+      max-height: 640px;
+      width: 100%;
+    }
+
+    table.neo-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.86rem;
+    }
+
+    table.neo-table th {
+      background: var(--ut-yellow);
+      color: #111827;
+      font-weight: 900;
+      padding: 12px 14px;
+      border-bottom: var(--neo-border);
+      border-right: var(--neo-border-sm);
+      white-space: nowrap;
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      letter-spacing: 0.6px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    table.neo-table th:last-child {
+      border-right: none;
+    }
+
+    table.neo-table td {
+      padding: 12px 14px;
+      border-bottom: var(--neo-border-sm);
+      border-right: var(--neo-border-sm);
+      font-weight: 600;
+      vertical-align: middle;
+      color: #1F2937;
+    }
+
+    table.neo-table td:last-child {
+      border-right: none;
+    }
+
+    table.neo-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    table.neo-table tr:hover {
+      background-color: var(--ut-yellow-soft);
+    }
+
+    /* Badges */
+    .sector-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border: var(--neo-border-sm);
+      font-weight: 900;
+      font-size: 0.74rem;
+      letter-spacing: 0.5px;
+      box-shadow: 1.5px 1.5px 0 #111827;
+      text-transform: uppercase;
+      border-radius: 3px;
+    }
+
+    .sector-CONS {
+      background: var(--sector-cons-bg);
+      color: var(--sector-cons-text);
+    }
+    .sector-MNG {
+      background: var(--sector-mng-bg);
+      color: var(--sector-mng-text);
+    }
+    .sector-AGR {
+      background: var(--sector-agr-bg);
+      color: var(--sector-agr-text);
+    }
+
+    .brand-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-weight: 800;
+      font-size: 0.8rem;
+      padding: 3px 9px;
+      background: #F3F4F6;
+      border: var(--neo-border-sm);
+      box-shadow: 1.5px 1.5px 0 #111827;
+      border-radius: 3px;
+    }
+
+    .brand-tag.hitachi { background: #FEE2E2; color: #991B1B; }
+    .brand-tag.sany { background: #FEF3C7; color: #92400E; }
+    .brand-tag.cat { background: #FEF08A; color: #713F12; }
+    .brand-tag.xcmg { background: #E0E7FF; color: #3730A3; }
+    .brand-tag.sumitomo { background: #E0F2FE; color: #075985; }
+    .brand-tag.hyundai { background: #F3E8FF; color: #6B21A8; }
+
+    /* Photo button */
+    .photo-btn {
+      background: #FFFFFF;
+      border: var(--neo-border-sm);
+      padding: 5px 10px;
+      font-weight: 800;
+      font-size: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      box-shadow: var(--neo-shadow-sm);
+      transition: all 0.1s;
+      text-decoration: none;
+      color: #111827;
+      border-radius: 4px;
+    }
+    .photo-btn:hover {
+      background: var(--ut-yellow);
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 #111827;
+    }
+
+    /* Gallery Grid View */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 18px;
+      margin-top: 16px;
+    }
+
+    .gallery-card {
+      background: #FFF;
+      border: var(--neo-border);
+      box-shadow: var(--neo-shadow);
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      transition: all 0.15s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--neo-shadow-lg);
+    }
+
+    .gallery-card-header {
+      padding: 12px 16px;
+      background: #F9FAFB;
+      border-bottom: var(--neo-border-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .gallery-card-body {
+      padding: 16px;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .gallery-card-footer {
+      padding: 12px 16px;
+      background: var(--ut-yellow-soft);
+      border-top: var(--neo-border-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    /* Card Iframe Embed Preview */
+    .card-iframe-box {
+      position: relative;
+      height: 200px;
+      background: #111827;
+      border-bottom: var(--neo-border-sm);
+      overflow: hidden;
+    }
+
+    .card-iframe-box iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #FFFFFF;
+      pointer-events: none; /* Allows clicking the card container */
+    }
+
+    .card-iframe-overlay {
+      position: absolute;
+      inset: 0;
+      background: transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-end;
+      padding: 8px;
+    }
+
+    /* Chart Container */
+    .chart-box {
+      position: relative;
+      height: 310px;
+      width: 100%;
+    }
+
+    /* Interactive Embed Modal / Lightbox */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-dialog {
+      background: #FFFFFF;
+      border: var(--neo-border);
+      box-shadow: var(--neo-shadow-lg);
+      border-radius: 8px;
+      max-width: 960px;
+      width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 24px;
+      position: relative;
+      animation: modalPop 0.15s ease-out;
+    }
+
+    @keyframes modalPop {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: var(--neo-border-sm);
+      padding-bottom: 14px;
+      margin-bottom: 16px;
+      gap: 12px;
+    }
+
+    .modal-close-btn {
+      background: #111827;
+      color: #FFF;
+      border: var(--neo-border-sm);
+      font-weight: 900;
+      font-size: 1rem;
+      width: 34px;
+      height: 34px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 2px 2px 0 var(--ut-yellow);
+      border-radius: 4px;
+      transition: all 0.1s;
+    }
+    .modal-close-btn:hover {
+      background: #EF4444;
+      transform: translate(-1px, -1px);
+    }
+
+    /* Modal Tabs for Multiple Photos */
+    .photo-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 14px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .photo-tab-btn {
+      background: #FFF;
+      border: var(--neo-border-sm);
+      box-shadow: 2px 2px 0 #111827;
+      padding: 6px 14px;
+      font-weight: 800;
+      font-size: 0.78rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 4px;
+      transition: all 0.1s ease;
+      white-space: nowrap;
+    }
+
+    .photo-tab-btn.active {
+      background: var(--ut-yellow);
+      box-shadow: 3px 3px 0 #111827;
+      transform: translateY(-2px);
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      height: 540px;
+      border: var(--neo-border-sm);
+      box-shadow: var(--neo-shadow-sm);
+      border-radius: 6px;
+      overflow: hidden;
+      background: #111827;
+    }
+
+    .iframe-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      background: #FFFFFF;
+    }
+
+    .modal-footer-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: var(--neo-border-sm);
+    }
+
+    /* Tabs */
+    .tab-group {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+      border-bottom: var(--neo-border-sm);
+      padding-bottom: 10px;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      background: #FFF;
+      border: var(--neo-border-sm);
+      box-shadow: var(--neo-shadow-sm);
+      padding: 8px 18px;
+      font-weight: 800;
+      font-size: 0.84rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: all 0.12s ease;
+      white-space: nowrap;
+      border-radius: 4px;
+      color: #111827;
+    }
+
+    .tab-btn:hover {
+      background: var(--ut-yellow-soft);
+    }
+
+    .tab-btn.active {
+      background: var(--ut-yellow);
+      box-shadow: 3px 3px 0 #111827;
+      transform: translateY(-2px);
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 768px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        padding: 12px 16px;
+      }
+      .header-logo-group, .header-actions {
+        justify-content: space-between;
+        width: 100%;
+      }
+      .container {
+        padding: 16px 14px 40px 14px;
+      }
+      .hero-banner {
+        padding: 20px 16px;
+      }
+      .hero-title {
+        font-size: 1.5rem;
+      }
+      .chart-box {
+        height: 250px;
+      }
+      .iframe-wrapper {
+        height: 380px;
+      }
+      .card-iframe-box {
+        height: 180px;
+      }
+      .neo-input {
+        width: 100%;
+        min-width: 100%;
+      }
+    }
+
+    /* Footer */
+    footer {
+      max-width: 1440px;
+      margin: 30px auto 0 auto;
+      padding: 0 20px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.82rem;
+      color: #6B7280;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Navigation -->
+  <header>
+    <div class="header-inner">
+      <div class="header-logo-group">
+        <div class="brand-box">
+          <i data-lucide="shield-alert" style="fill: var(--ut-yellow); stroke: #111827; stroke-width: 2.2;"></i>
+          <span>UNITED TRACTORS</span>
+        </div>
+        <div class="brand-tagline">MIB EXHIBITION · PADANG MANJADI</div>
+      </div>
+      <div class="header-actions">
+        <div class="badge-black">39 Unit Competitor Records</div>
+        <button class="neo-btn neo-btn-primary" onclick="window.print()">
+          <i data-lucide="printer" style="width: 15px; height: 15px;"></i> Print / PDF
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Hero Banner -->
+    <div class="hero-banner">
+      <div class="hero-stripes"></div>
+      <div class="hero-content">
+        <div class="hero-badge-row">
+          <span class="badge-pill"><i data-lucide="crosshair" style="width: 14px; height: 14px;"></i> MARKET INTELLIGENCE BRANCH (MIB)</span>
+          <span class="badge-pill">COMPETITOR MONITORING</span>
+          <span class="badge-black">AREA: SUMATERA BARAT & JAMBI</span>
+        </div>
+        <h1 class="hero-title">EXHIBITION COMPETITOR DASHBOARD</h1>
+        <p class="hero-subtitle">
+          Pusat data intelijen kompetitor dan unit masuk area operasional <strong>United Tractors Padang (PDG)</strong>. Monitoring penetrasi brand kompetitor (Hitachi, SANY, Caterpillar, XCMG, dll.), sektor bisnis, persebaran wilayah, dan dokumentasi foto lapangan langsung via Google Drive preview.
+        </p>
+      </div>
+    </div>
+
+    <!-- Top Key Metrics Cards (4 Symmetrical Columns) -->
+    <div class="kpi-grid">
+      <div class="kpi-card highlight">
+        <div class="kpi-header">
+          <span class="kpi-label">Total Temuan MIB</span>
+          <div class="kpi-icon-box"><i data-lucide="truck" style="width: 18px; height: 18px;"></i></div>
+        </div>
+        <div class="kpi-value" id="kpi-total-records">39 Temuan</div>
+        <div class="kpi-subtext">
+          <i data-lucide="check-circle-2" style="width: 15px; height: 15px;"></i> Database unit kompetitor
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Top Competitor Brand</span>
+          <div class="kpi-icon-box"><i data-lucide="flame" style="width: 18px; height: 18px;"></i></div>
+        </div>
+        <div class="kpi-value" id="kpi-top-brand">Hitachi & SANY</div>
+        <div class="kpi-subtext">
+          <span class="badge-pill" style="padding: 2px 8px; font-size: 0.72rem;" id="kpi-top-brand-sub">8 Unit Masing-Masing</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Sektor Dominan</span>
+          <div class="kpi-icon-box"><i data-lucide="hard-hat" style="width: 18px; height: 18px;"></i></div>
+        </div>
+        <div class="kpi-value" id="kpi-top-sector" style="color: #3730A3;">CONS (48.7%)</div>
+        <div class="kpi-subtext">
+          <span class="sector-badge sector-CONS">19 Konstruksi</span>
+        </div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-label">Wilayah Terpantau</span>
+          <div class="kpi-icon-box"><i data-lucide="map-pin" style="width: 18px; height: 18px;"></i></div>
+        </div>
+        <div class="kpi-value" id="kpi-total-areas">9 Area</div>
+        <div class="kpi-subtext">
+          <i data-lucide="navigation" style="width: 15px; height: 15px;"></i> Padang, Dharmasraya, Solok+
+        </div>
+      </div>
+    </div>
+
+    <!-- Spotlight Info Banner -->
+    <div class="spotlight-card">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px;">
+        <div>
+          <span class="badge-black">EXECUTIVE MARKET INTELLIGENCE SUMMARY</span>
+          <h2 style="font-size: 1.5rem; font-weight: 900; margin-top: 6px; text-transform: uppercase;">
+            Analisis Penetrasi Unit Kompetitor Area Padang & Sekitarnya
+          </h2>
+          <p style="font-weight: 700; margin-top: 2px; color: #111827;">
+            Klasifikasi Sektor: <strong>Construction (CONS)</strong> · <strong>Mining (MNG)</strong> · <strong>Agriculture (AGR)</strong>
+          </p>
+        </div>
+      </div>
+
+      <div class="spotlight-grid">
+        <div class="spotlight-metric">
+          <div class="spotlight-metric-label">Wilayah Tertinggi</div>
+          <div class="spotlight-metric-val" id="spotlight-top-area">Padang (10 Temuan)</div>
+        </div>
+        <div class="spotlight-metric">
+          <div class="spotlight-metric-label">Unit Mining (MNG)</div>
+          <div class="spotlight-metric-val" id="spotlight-mng-count">12 Unit (30.8%)</div>
+        </div>
+        <div class="spotlight-metric">
+          <div class="spotlight-metric-label">Unit Agriculture (AGR)</div>
+          <div class="spotlight-metric-val" id="spotlight-agr-count">8 Unit (20.5%)</div>
+        </div>
+        <div class="spotlight-metric">
+          <div class="spotlight-metric-label">Total Foto Dokumentasi</div>
+          <div class="spotlight-metric-val" id="spotlight-photo-count" style="color: #047857;">61 Link Bukti</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Charts Row: Brand Distribution & Sector Breakdown -->
+    <div class="grid-2col-equal">
+      <div class="neo-panel">
+        <div class="panel-title-bar">
+          <h3 class="panel-title"><i data-lucide="bar-chart-3"></i> Distribusi Brand Kompetitor</h3>
+          <span class="badge-pill">Ranking Brand</span>
+        </div>
+        <div class="chart-box">
+          <canvas id="chartBrandDist"></canvas>
+        </div>
+      </div>
+
+      <div class="neo-panel">
+        <div class="panel-title-bar">
+          <h3 class="panel-title"><i data-lucide="pie-chart"></i> Komposisi Sektor</h3>
+          <span class="badge-black">CONS vs MNG vs AGR</span>
+        </div>
+        <div class="chart-box">
+          <canvas id="chartSectorDist"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Panel: Table & Cards View -->
+    <div class="neo-panel">
+      <div class="panel-title-bar">
+        <div>
+          <h3 class="panel-title"><i data-lucide="database"></i> Data Temuan Kompetitor Lapangan (MIB)</h3>
+        </div>
+        
+        <!-- Filter Controls -->
+        <div class="filter-group">
+          <select id="filter-sector" class="neo-select" onchange="applyFilters()">
+            <option value="all" selected>Semua Sektor (All)</option>
+            <option value="CONS">CONS (Konstruksi)</option>
+            <option value="MNG">MNG (Mining)</option>
+            <option value="AGR">AGR (Agro / Sawit)</option>
+          </select>
+          
+          <select id="filter-brand" class="neo-select" onchange="applyFilters()">
+            <option value="all" selected>Semua Brand</option>
+          </select>
+
+          <select id="filter-area" class="neo-select" onchange="applyFilters()">
+            <option value="all" selected>Semua Wilayah</option>
+          </select>
+
+          <input type="text" id="search-keyword" class="neo-input" placeholder="Cari lokasi, info tambahan, model..." oninput="applyFilters()">
+          
+          <button class="neo-btn" onclick="resetFilters()">
+            <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i> Reset
+          </button>
+        </div>
+      </div>
+
+      <!-- View Switcher Tabs -->
+      <div class="tab-group">
+        <button class="tab-btn active" id="tab-table-view" onclick="switchView('table')">
+          <i data-lucide="table" style="width: 16px; height: 16px;"></i> Mode Tabel Rinci
+        </button>
+        <button class="tab-btn" id="tab-cards-view" onclick="switchView('cards')">
+          <i data-lucide="grid" style="width: 16px; height: 16px;"></i> Mode Kartu & Preview Drive
+        </button>
+      </div>
+
+      <!-- Result Counter -->
+      <div style="margin-bottom: 12px; font-weight: 800; font-size: 0.85rem; display: flex; justify-content: space-between; align-items: center;">
+        <span id="result-count-label">Menampilkan 39 dari 39 data</span>
+      </div>
+
+      <!-- Table View -->
+      <div class="table-responsive" id="view-table-container">
+        <table class="neo-table">
+          <thead>
+            <tr>
+              <th style="width: 45px; text-align: center;">No</th>
+              <th>Lokasi / Titik</th>
+              <th>Area Wilayah</th>
+              <th>Sektor</th>
+              <th>Brand</th>
+              <th>Unit Masuk / Aplikasi</th>
+              <th>Informasi Tambahan / Spesifikasi</th>
+              <th style="text-align: center;">Foto Bukti</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-mib-records"></tbody>
+        </table>
+      </div>
+
+      <!-- Cards / Gallery View with direct iframe previews -->
+      <div class="gallery-grid" id="view-cards-container" style="display: none;"></div>
+
+    </div>
+
+    <!-- Area Summary Ranking Panel -->
+    <div class="neo-panel">
+      <div class="panel-title-bar">
+        <h3 class="panel-title"><i data-lucide="map"></i> Rekap Persebaran Temuan Unit Berdasarkan Wilayah</h3>
+        <span class="badge-pill">Area Intelligence</span>
+      </div>
+      <div class="table-responsive">
+        <table class="neo-table">
+          <thead>
+            <tr>
+              <th>Wilayah (Area)</th>
+              <th style="text-align: center;">Total Unit</th>
+              <th style="text-align: center;">CONS (Konstruksi)</th>
+              <th style="text-align: center;">MNG (Mining)</th>
+              <th style="text-align: center;">AGR (Agro)</th>
+              <th>Brand Dominan</th>
+            </tr>
+          </thead>
+          <tbody id="tbody-area-summary"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Data Source: MIB for Exhibition.xlsx · Market Intelligence Branch · United Tractors Padang</p>
+    </footer>
+
+  </div>
+
+  <!-- Interactive Embed Modal with Google Drive IFrame -->
+  <div class="modal-backdrop" id="imageModal" onclick="closeImageModal(event)">
+    <div class="modal-dialog" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <div>
+          <span class="badge-pill" id="modal-brand-badge">Brand</span>
+          <h3 style="font-size: 1.25rem; font-weight: 900; margin-top: 6px;" id="modal-title">Dokumentasi Foto Unit</h3>
+          <p style="font-size: 0.82rem; font-weight: 700; color: #4B5563; margin-top: 2px;" id="modal-subtitle">Lokasi</p>
+        </div>
+        <button class="modal-close-btn" onclick="closeImageModal()">✕</button>
+      </div>
+      
+      <p style="font-size: 0.85rem; font-weight: 700; margin-bottom: 12px; background: var(--ut-yellow-soft); padding: 8px 12px; border: var(--neo-border-sm); border-radius: 4px;" id="modal-info"></p>
+      
+      <!-- Photo Tab Selector for multiple photos -->
+      <div class="photo-tabs" id="modal-photo-tabs"></div>
+
+      <!-- IFrame Container for Google Drive Embed -->
+      <div class="iframe-wrapper">
+        <iframe id="modal-iframe" src="" allow="autoplay"></iframe>
+      </div>
+
+      <div class="modal-footer-bar">
+        <span style="font-size: 0.78rem; font-weight: 700; color: #6B7280;" id="modal-counter-text">Foto 1 dari 1</span>
+        <a id="modal-external-link" href="#" target="_blank" rel="noopener noreferrer" class="neo-btn neo-btn-primary">
+          <i data-lucide="external-link" style="width: 14px; height: 14px;"></i> Buka di Tab Google Drive Baru
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Load Data Payload -->
+  <script src="data.js"></script>
+
+  <!-- Application Logic -->
+  <script>
+    const RAW_DATA = window.MIB_DATA || [];
+    let currentData = [...RAW_DATA];
+    let activeView = 'table';
+    let brandChart = null;
+    let sectorChart = null;
+
+    let currentModalPhotos = [];
+    let activePhotoIndex = 0;
+
+    window.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+      populateDropdowns();
+      initKPIOverview();
+      renderCharts();
+      renderTable();
+      renderAreaSummary();
+      lucide.createIcons();
+    });
+
+    function populateDropdowns() {
+      const brandSet = new Set();
+      const areaSet = new Set();
+
+      RAW_DATA.forEach(item => {
+        if (item.brand) brandSet.add(item.brand);
+        if (item.lokasi_area) areaSet.add(item.lokasi_area);
+      });
+
+      const brandSelect = document.getElementById('filter-brand');
+      Array.from(brandSet).sort().forEach(b => {
+        const opt = document.createElement('option');
+        opt.value = b;
+        opt.innerText = b;
+        brandSelect.appendChild(opt);
+      });
+
+      const areaSelect = document.getElementById('filter-area');
+      Array.from(areaSet).sort().forEach(a => {
+        const opt = document.createElement('option');
+        opt.value = a;
+        opt.innerText = a;
+        areaSelect.appendChild(opt);
+      });
+    }
+
+    function initKPIOverview() {
+      const total = RAW_DATA.length;
+      document.getElementById('kpi-total-records').innerText = `${total} Temuan`;
+
+      // Brand counts
+      const brandCounts = {};
+      const sectorCounts = { CONS: 0, MNG: 0, AGR: 0 };
+      const areaCounts = {};
+      let totalPhotos = 0;
+
+      RAW_DATA.forEach(d => {
+        brandCounts[d.brand] = (brandCounts[d.brand] || 0) + 1;
+        if (sectorCounts[d.sector] !== undefined) {
+          sectorCounts[d.sector]++;
+        }
+        areaCounts[d.lokasi_area] = (areaCounts[d.lokasi_area] || 0) + 1;
+        totalPhotos += (d.photos || []).length;
+      });
+
+      // Top brand
+      const sortedBrands = Object.entries(brandCounts).sort((a, b) => b[1] - a[1]);
+      if (sortedBrands.length >= 2) {
+        document.getElementById('kpi-top-brand').innerText = `${sortedBrands[0][0]} & ${sortedBrands[1][0]}`;
+        document.getElementById('kpi-top-brand-sub').innerText = `${sortedBrands[0][1]} Unit (${sortedBrands[0][0]}) & ${sortedBrands[1][1]} Unit (${sortedBrands[1][0]})`;
+      }
+
+      // Top Sector
+      const consPct = ((sectorCounts.CONS / total) * 100).toFixed(1);
+      document.getElementById('kpi-top-sector').innerText = `CONS (${consPct}%)`;
+
+      // Total areas
+      document.getElementById('kpi-total-areas').innerText = `${Object.keys(areaCounts).length} Area`;
+
+      // Spotlight calculations
+      const sortedAreas = Object.entries(areaCounts).sort((a, b) => b[1] - a[1]);
+      if (sortedAreas.length > 0) {
+        document.getElementById('spotlight-top-area').innerText = `${sortedAreas[0][0]} (${sortedAreas[0][1]} Temuan)`;
+      }
+
+      const mngPct = ((sectorCounts.MNG / total) * 100).toFixed(1);
+      const agrPct = ((sectorCounts.AGR / total) * 100).toFixed(1);
+      document.getElementById('spotlight-mng-count').innerText = `${sectorCounts.MNG} Unit (${mngPct}%)`;
+      document.getElementById('spotlight-agr-count').innerText = `${sectorCounts.AGR} Unit (${agrPct}%)`;
+      document.getElementById('spotlight-photo-count').innerText = `${totalPhotos} Link Bukti`;
+    }
+
+    function getBrandBadgeClass(brand) {
+      const b = (brand || '').toLowerCase();
+      if (b.includes('hitachi')) return 'hitachi';
+      if (b.includes('sany')) return 'sany';
+      if (b.includes('caterpillar') || b.includes('cat')) return 'cat';
+      if (b.includes('xcmg')) return 'xcmg';
+      if (b.includes('sumitomo')) return 'sumitomo';
+      if (b.includes('hyundai')) return 'hyundai';
+      return '';
+    }
+
+    function renderTable() {
+      const tbody = document.getElementById('tbody-mib-records');
+      tbody.innerHTML = '';
+
+      if (currentData.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="8" style="text-align: center; padding: 36px; font-weight: 800; color: #6B7280;">Tidak ada data yang sesuai dengan filter.</td></tr>`;
+        return;
+      }
+
+      currentData.forEach((item, idx) => {
+        const tr = document.createElement('tr');
+        const photoCount = (item.photos || []).length;
+        const brandBadgeClass = getBrandBadgeClass(item.brand);
+
+        let photoBtn = `<span style="color:#9CA3AF; font-size:0.75rem;">-</span>`;
+        if (photoCount > 0) {
+          photoBtn = `
+            <button class="photo-btn" onclick="openImageModal(${item.id})">
+              <i data-lucide="image" style="width: 14px; height: 14px;"></i>
+              <span>${photoCount} Foto</span>
+            </button>
+          `;
+        }
+
+        tr.innerHTML = `
+          <td style="text-align: center; font-weight: 900;">${idx + 1}</td>
+          <td style="font-weight: 800; max-width: 220px; white-space: normal;">${escapeHtml(item.lokasi_raw)}</td>
+          <td><span class="badge-pill" style="font-size:0.72rem; padding: 3px 8px;">${escapeHtml(item.lokasi_area)}</span></td>
+          <td><span class="sector-badge sector-${item.sector}">${item.sector}</span></td>
+          <td><span class="brand-tag ${brandBadgeClass}">${escapeHtml(item.brand)}</span></td>
+          <td style="max-width: 280px; white-space: normal; font-size: 0.83rem;">${escapeHtml(item.aplikasi_masuk || '-')}</td>
+          <td style="max-width: 280px; white-space: normal; font-size: 0.83rem; font-weight: 700; color: #374151;">${escapeHtml(item.info_tambahan || '-')}</td>
+          <td style="text-align: center;">${photoBtn}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+
+      lucide.createIcons();
+    }
+
+    function renderCards() {
+      const container = document.getElementById('view-cards-container');
+      container.innerHTML = '';
+
+      if (currentData.length === 0) {
+        container.innerHTML = `<div style="grid-column: 1/-1; text-align: center; padding: 40px; font-weight: 800; color: #6B7280;">Tidak ada data yang sesuai dengan filter.</div>`;
+        return;
+      }
+
+      currentData.forEach((item, idx) => {
+        const photoCount = (item.photos || []).length;
+        const brandBadgeClass = getBrandBadgeClass(item.brand);
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+
+        let iframeEmbedPreview = '';
+        if (photoCount > 0) {
+          const p = item.photos[0];
+          iframeEmbedPreview = `
+            <div class="card-iframe-box">
+              <iframe src="${p.iframe_url}" loading="lazy" allow="autoplay"></iframe>
+              <div class="card-iframe-overlay" onclick="openImageModal(${item.id})">
+                <span class="badge-black" style="font-size: 0.7rem; padding: 4px 8px; cursor: pointer;">
+                  <i data-lucide="maximize-2" style="width: 12px; height: 12px;"></i> Perbesar (${photoCount} Foto)
+                </span>
+              </div>
+            </div>
+          `;
+        }
+
+        card.innerHTML = `
+          ${iframeEmbedPreview}
+          <div class="gallery-card-header">
+            <span class="brand-tag ${brandBadgeClass}">${escapeHtml(item.brand)}</span>
+            <span class="sector-badge sector-${item.sector}">${item.sector}</span>
+          </div>
+          <div class="gallery-card-body">
+            <div style="font-weight: 900; font-size: 0.98rem; line-height: 1.25;">
+              <i data-lucide="map-pin" style="width: 14px; height: 14px; display: inline-block; vertical-align: text-top; color: #EF4444;"></i> ${escapeHtml(item.lokasi_raw)}
+            </div>
+            <div style="font-size: 0.78rem; font-weight: 700; color: #6B7280;">Area: ${escapeHtml(item.lokasi_area)}</div>
+            <div style="font-size: 0.83rem; font-weight: 600; color: #1F2937; margin-top: 4px; border-left: 3px solid var(--ut-yellow); padding-left: 10px;">
+              ${escapeHtml(item.aplikasi_masuk || '-')}
+            </div>
+            ${item.info_tambahan ? `<div style="font-size: 0.8rem; font-weight: 700; color: #111827; background: var(--ut-yellow-soft); padding: 8px 10px; border: var(--neo-border-sm); border-radius: 4px;">ℹ️ ${escapeHtml(item.info_tambahan)}</div>` : ''}
+          </div>
+          <div class="gallery-card-footer">
+            <span style="font-size: 0.74rem; font-weight: 800; color: #6B7280;">#ID: ${item.id}</span>
+            ${photoCount > 0 ? `
+              <button class="photo-btn" onclick="openImageModal(${item.id})">
+                <i data-lucide="external-link" style="width: 13px; height: 13px;"></i> Buka Preview (${photoCount})
+              </button>
+            ` : '<span style="font-size:0.75rem; color:#9CA3AF;">Tidak ada foto</span>'}
+          </div>
+        `;
+        container.appendChild(card);
+      });
+
+      lucide.createIcons();
+    }
+
+    function renderAreaSummary() {
+      const tbody = document.getElementById('tbody-area-summary');
+      tbody.innerHTML = '';
+
+      const areaStats = {};
+      RAW_DATA.forEach(d => {
+        const a = d.lokasi_area;
+        if (!areaStats[a]) {
+          areaStats[a] = { total: 0, cons: 0, mng: 0, agr: 0, brands: {} };
+        }
+        areaStats[a].total++;
+        if (d.sector === 'CONS') areaStats[a].cons++;
+        if (d.sector === 'MNG') areaStats[a].mng++;
+        if (d.sector === 'AGR') areaStats[a].agr++;
+        areaStats[a].brands[d.brand] = (areaStats[a].brands[d.brand] || 0) + 1;
+      });
+
+      const sortedAreas = Object.entries(areaStats).sort((a, b) => b[1].total - a[1].total);
+
+      sortedAreas.forEach(([areaName, stat]) => {
+        const topBrand = Object.entries(stat.brands).sort((a, b) => b[1] - a[1])[0];
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td style="font-weight: 900;"><i data-lucide="map-pin" style="width: 14px; height: 14px; display: inline-block; color: #EF4444;"></i> ${escapeHtml(areaName)}</td>
+          <td style="text-align: center; font-weight: 900; font-size: 1rem;"><span class="badge-pill" style="padding: 3px 10px;">${stat.total}</span></td>
+          <td style="text-align: center; font-weight: 800;">${stat.cons > 0 ? `<span class="sector-badge sector-CONS">${stat.cons}</span>` : '-'}</td>
+          <td style="text-align: center; font-weight: 800;">${stat.mng > 0 ? `<span class="sector-badge sector-MNG">${stat.mng}</span>` : '-'}</td>
+          <td style="text-align: center; font-weight: 800;">${stat.agr > 0 ? `<span class="sector-badge sector-AGR">${stat.agr}</span>` : '-'}</td>
+          <td><span class="brand-tag ${getBrandBadgeClass(topBrand[0])}">${escapeHtml(topBrand[0])} (${topBrand[1]} unit)</span></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderCharts() {
+      // 1. Brand distribution chart
+      const brandCounts = {};
+      RAW_DATA.forEach(d => {
+        brandCounts[d.brand] = (brandCounts[d.brand] || 0) + 1;
+      });
+
+      const sortedBrands = Object.entries(brandCounts).sort((a, b) => b[1] - a[1]);
+      const brandLabels = sortedBrands.map(b => b[0]);
+      const brandVals = sortedBrands.map(b => b[1]);
+
+      const ctxBrand = document.getElementById('chartBrandDist').getContext('2d');
+      if (brandChart) brandChart.destroy();
+      brandChart = new Chart(ctxBrand, {
+        type: 'bar',
+        data: {
+          labels: brandLabels,
+          datasets: [{
+            label: 'Jumlah Temuan Unit',
+            data: brandVals,
+            backgroundColor: brandLabels.map((_, i) => i < 3 ? '#FFD000' : '#111827'),
+            borderColor: '#111827',
+            borderWidth: 2,
+            borderRadius: 4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => ` ${ctx.raw} Unit Kompetitor`
+              }
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: { stepSize: 2, font: { family: 'Plus Jakarta Sans', weight: '700' } },
+              grid: { color: '#E5E7EB' }
+            },
+            x: {
+              ticks: {
+                font: { family: 'Plus Jakarta Sans', weight: '700', size: 10 },
+                maxRotation: 45,
+                minRotation: 30
+              },
+              grid: { display: false }
+            }
+          }
+        }
+      });
+
+      // 2. Sector Distribution Chart (Doughnut)
+      const sectorCounts = { 'Construction (CONS)': 0, 'Mining (MNG)': 0, 'Agro (AGR)': 0 };
+      RAW_DATA.forEach(d => {
+        if (d.sector === 'CONS') sectorCounts['Construction (CONS)']++;
+        if (d.sector === 'MNG') sectorCounts['Mining (MNG)']++;
+        if (d.sector === 'AGR') sectorCounts['Agro (AGR)']++;
+      });
+
+      const ctxSector = document.getElementById('chartSectorDist').getContext('2d');
+      if (sectorChart) sectorChart.destroy();
+      sectorChart = new Chart(ctxSector, {
+        type: 'doughnut',
+        data: {
+          labels: Object.keys(sectorCounts),
+          datasets: [{
+            data: Object.values(sectorCounts),
+            backgroundColor: ['#818CF8', '#F87171', '#4ADE80'],
+            borderColor: '#111827',
+            borderWidth: 2.5
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+              labels: {
+                font: { family: 'Plus Jakarta Sans', weight: '700', size: 11 },
+                padding: 14
+              }
+            }
+          },
+          cutout: '60%'
+        }
+      });
+    }
+
+    function applyFilters() {
+      const sectorVal = document.getElementById('filter-sector').value;
+      const brandVal = document.getElementById('filter-brand').value;
+      const areaVal = document.getElementById('filter-area').value;
+      const query = document.getElementById('search-keyword').value.toLowerCase().trim();
+
+      currentData = RAW_DATA.filter(item => {
+        if (sectorVal !== 'all' && item.sector !== sectorVal) return false;
+        if (brandVal !== 'all' && item.brand !== brandVal) return false;
+        if (areaVal !== 'all' && item.lokasi_area !== areaVal) return false;
+
+        if (query) {
+          const matchLokasi = (item.lokasi_raw || '').toLowerCase().includes(query);
+          const matchArea = (item.lokasi_area || '').toLowerCase().includes(query);
+          const matchBrand = (item.brand || '').toLowerCase().includes(query);
+          const matchApp = (item.aplikasi_masuk || '').toLowerCase().includes(query);
+          const matchInfo = (item.info_tambahan || '').toLowerCase().includes(query);
+          if (!matchLokasi && !matchArea && !matchBrand && !matchApp && !matchInfo) return false;
+        }
+
+        return true;
+      });
+
+      document.getElementById('result-count-label').innerText = `Menampilkan ${currentData.length} dari ${RAW_DATA.length} data`;
+
+      if (activeView === 'table') {
+        renderTable();
+      } else {
+        renderCards();
+      }
+    }
+
+    function resetFilters() {
+      document.getElementById('filter-sector').value = 'all';
+      document.getElementById('filter-brand').value = 'all';
+      document.getElementById('filter-area').value = 'all';
+      document.getElementById('search-keyword').value = '';
+      applyFilters();
+    }
+
+    function switchView(view) {
+      activeView = view;
+      const tblBtn = document.getElementById('tab-table-view');
+      const crdBtn = document.getElementById('tab-cards-view');
+      const tblContainer = document.getElementById('view-table-container');
+      const crdContainer = document.getElementById('view-cards-container');
+
+      if (view === 'table') {
+        tblBtn.classList.add('active');
+        crdBtn.classList.remove('active');
+        tblContainer.style.display = 'block';
+        crdContainer.style.display = 'none';
+        renderTable();
+      } else {
+        crdBtn.classList.add('active');
+        tblBtn.classList.remove('active');
+        tblContainer.style.display = 'none';
+        crdContainer.style.display = 'grid';
+        renderCards();
+      }
+    }
+
+    function openImageModal(id) {
+      const item = RAW_DATA.find(d => d.id === id);
+      if (!item || !item.photos || item.photos.length === 0) return;
+
+      currentModalPhotos = item.photos;
+      activePhotoIndex = 0;
+
+      document.getElementById('modal-brand-badge').innerText = `${item.brand} · ${item.sector}`;
+      document.getElementById('modal-title').innerText = item.lokasi_raw;
+      document.getElementById('modal-subtitle').innerText = `Area: ${item.lokasi_area} | Unit Masuk: ${item.aplikasi_masuk || '-'}`;
+      document.getElementById('modal-info').innerText = item.info_tambahan ? `Spesifikasi / Catatan: ${item.info_tambahan}` : 'Tidak ada spesifikasi tambahan.';
+
+      renderModalPhotoTabs();
+      loadModalIframe(0);
+
+      document.getElementById('imageModal').classList.add('active');
+      lucide.createIcons();
+    }
+
+    function renderModalPhotoTabs() {
+      const tabsContainer = document.getElementById('modal-photo-tabs');
+      tabsContainer.innerHTML = '';
+
+      if (currentModalPhotos.length <= 1) {
+        tabsContainer.style.display = 'none';
+        return;
+      }
+
+      tabsContainer.style.display = 'flex';
+      currentModalPhotos.forEach((photo, idx) => {
+        const btn = document.createElement('button');
+        btn.className = `photo-tab-btn ${idx === activePhotoIndex ? 'active' : ''}`;
+        btn.innerHTML = `<i data-lucide="image" style="width: 14px; height: 14px;"></i> Foto ${idx + 1}`;
+        btn.onclick = () => {
+          activePhotoIndex = idx;
+          renderModalPhotoTabs();
+          loadModalIframe(idx);
+        };
+        tabsContainer.appendChild(btn);
+      });
+      lucide.createIcons();
+    }
+
+    function loadModalIframe(idx) {
+      const photo = currentModalPhotos[idx];
+      if (!photo) return;
+
+      const iframe = document.getElementById('modal-iframe');
+      iframe.src = photo.iframe_url;
+
+      document.getElementById('modal-counter-text').innerText = `Foto ${idx + 1} dari ${currentModalPhotos.length}`;
+      document.getElementById('modal-external-link').href = photo.url;
+    }
+
+    function closeImageModal(e) {
+      if (e && e.target !== e.currentTarget && !e.target.classList.contains('modal-close-btn')) return;
+      document.getElementById('imageModal').classList.remove('active');
+      document.getElementById('modal-iframe').src = ''; // reset iframe
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+  </script>
+</body>
+</html>

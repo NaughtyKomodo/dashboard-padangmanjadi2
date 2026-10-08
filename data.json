@@ -1,0 +1,492 @@
+[
+  {
+    "row_id": 2,
+    "lokasi_raw": "Sinamar-Dharmasraya",
+    "lokasi_area": "Dharmasraya",
+    "sector": "MNG",
+    "brand": "XCMG",
+    "aplikasi_masuk": "Unit mutasian dari site KIN lubuk jambi ke sit KMC Sinamar (PT GEL groub)",
+    "foto_links": [
+      "https://drive.google.com/open?id=10hIbYmpEYMCwSz3YdqFnFgyw_W_1tg1B",
+      "https://drive.google.com/open?id=1MUDZ2aMQy6AAxoSP6R1y7Si6q4-h6iTo",
+      "https://drive.google.com/open?id=1tXaPFGParrJL_J5E17oAD4KMtp2vwZIu",
+      "https://drive.google.com/open?id=1DSHnVTn93aZDc0foCFQ8A6Lw8kSuY1Qs"
+    ],
+    "info_tambahan": "Masuk XCMG Hanvan DH400T sebanyak 12 unit"
+  },
+  {
+    "row_id": 3,
+    "lokasi_raw": "Sinamar - Dharmasraya",
+    "lokasi_area": "Dharmasraya",
+    "sector": "MNG",
+    "brand": "Hitachi",
+    "aplikasi_masuk": "Unit mutasian dari site KIN lubuk jambi ke siye KMC Sinamar (PT GEL groub)",
+    "foto_links": [
+      "https://drive.google.com/open?id=1il8YF43y_klkaSvAP-_WFRNK9iqNPvRK",
+      "https://drive.google.com/open?id=1xt0QxpPAxoXGtJDb0x26L04KvgRTLPpj",
+      "https://drive.google.com/open?id=1RliAKHVc7AdGANNjQOilZV6zlI5SQhmE"
+    ],
+    "info_tambahan": "Hitachi Zaxis ZX470 sebanyak 4 unit"
+  },
+  {
+    "row_id": 4,
+    "lokasi_raw": "Kuansing Inti Makmur - Rantau Ikil",
+    "lokasi_area": "Dharmasraya",
+    "sector": "MNG",
+    "brand": "Mercedes Bens",
+    "aplikasi_masuk": "Unit mutasian dari CK-MHU Kaltim ke CK - KIM Jambi",
+    "foto_links": [
+      "https://drive.google.com/open?id=1sI3iIabZV67XOLj8sxRrEuivE2gM4Ltx",
+      "https://drive.google.com/open?id=1sk3sHoGS54-sKksjYxxYXh8MsU1gczAw",
+      "https://drive.google.com/open?id=1HVPlDOc0D3ef8toxRbSDRZglnKOckM0N",
+      "https://drive.google.com/open?id=1-nVSSK8Zy4G9Sty7yc7U5_SuyejnFoOH"
+    ],
+    "info_tambahan": "7 kali Mercedes Bens Arocs 4040"
+  },
+  {
+    "row_id": 5,
+    "lokasi_raw": "Padang support Rantau ikil",
+    "lokasi_area": "Dharmasraya",
+    "sector": "MNG",
+    "brand": "Caterpillar",
+    "aplikasi_masuk": "1 kali D10T (Dozer kelas komatsu D375) masuk ke CK KIM - Rantau ikil",
+    "foto_links": [
+      "https://drive.google.com/open?id=1cvRP4id0s-wmqMONCIkVjdJQOdtIE-5W",
+      "https://drive.google.com/open?id=1gTNP5kaHu8l9CrHMWpFDg7lnwoJjCRK-",
+      "https://drive.google.com/open?id=10JiKW28P0NqUrySJVIwvsIFgYmpDowRy"
+    ],
+    "info_tambahan": "Unit mutasi dari CK DMP lahat le CK KIM Rantau ikil"
+  },
+  {
+    "row_id": 6,
+    "lokasi_raw": "Tambang Semen Padang",
+    "lokasi_area": "Padang",
+    "sector": "CONS",
+    "brand": "Hitachi",
+    "aplikasi_masuk": "Tambang semen padang",
+    "foto_links": [
+      "https://drive.google.com/open?id=1ybMaXEodV0M7NC4vKySwZOppASsEi-1R",
+      "https://drive.google.com/open?id=1k3VjUSOqbVx1XxmiiLAHdsoXwkpjdQNG"
+    ],
+    "info_tambahan": "Unit Hitachi Zakzis 210 .. punya PT.NJA plan nya untuk Suport di semen padang"
+  },
+  {
+    "row_id": 7,
+    "lokasi_raw": "Pabrik Semen Padang Indarung",
+    "lokasi_area": "Padang",
+    "sector": "CONS",
+    "brand": "Hitachi",
+    "aplikasi_masuk": "Pekerjaan kontruksi di area pabrik",
+    "foto_links": [
+      "https://drive.google.com/open?id=1EebXMvsASGSYXZ5eXhBtRuOd47P4BpLC"
+    ],
+    "info_tambahan": "Hytachi Zaxis 110"
+  },
+  {
+    "row_id": 8,
+    "lokasi_raw": "Pt.Megasawindo perkasa",
+    "lokasi_area": "Muara Bungo",
+    "sector": "AGR",
+    "brand": "Sakai",
+    "aplikasi_masuk": "Kebun",
+    "foto_links": [
+      "https://drive.google.com/open?id=1NtziceJAMwQbPw2QwQBUT6wvIIAJP7Qq"
+    ],
+    "info_tambahan": "SV525D"
+  },
+  {
+    "row_id": 9,
+    "lokasi_raw": "Pt.Megasawindo Perkasa",
+    "lokasi_area": "Muara Bungo",
+    "sector": "AGR",
+    "brand": "JCB",
+    "aplikasi_masuk": "Kebun",
+    "foto_links": [
+      "https://drive.google.com/open?id=1KKareWNCWSAWo1foZ9iWaLHqMUer9FWJ"
+    ],
+    "info_tambahan": "JCB MV115"
+  },
+  {
+    "row_id": 10,
+    "lokasi_raw": "Pt.Megasawindo perkasa",
+    "lokasi_area": "Muara Bungo",
+    "sector": "AGR",
+    "brand": "Caterpillar",
+    "aplikasi_masuk": "Kebun",
+    "foto_links": [
+      "https://drive.google.com/open?id=14OxtBYaZrNVplu_gd8nzsgZETKvR9f0W"
+    ],
+    "info_tambahan": "Motor grader CAT 120K"
+  },
+  {
+    "row_id": 11,
+    "lokasi_raw": "Pt.Megasawindo perkasa",
+    "lokasi_area": "Muara Bungo",
+    "sector": "AGR",
+    "brand": "Caterpillar",
+    "aplikasi_masuk": "Kebun",
+    "foto_links": [
+      "https://drive.google.com/open?id=1A6rJeGzlg1x1XUI4Aw5K1ZY7VW49NPSU"
+    ],
+    "info_tambahan": "Motor grader CAT 120H"
+  },
+  {
+    "row_id": 12,
+    "lokasi_raw": "PT.Megasawindo Perkasa POM",
+    "lokasi_area": "Muara Bungo",
+    "sector": "AGR",
+    "brand": "Liugong",
+    "aplikasi_masuk": "Pabrik",
+    "foto_links": [
+      "https://drive.google.com/open?id=1u6ikUOcfNG7kc8vc4om04iJDZRnJGBHR"
+    ],
+    "info_tambahan": "Wheel Loader LIUGONG 835H"
+  },
+  {
+    "row_id": 13,
+    "lokasi_raw": "Lokasi unit di PT.BTN (Incasi Raya group) - Ujung gading",
+    "lokasi_area": "Pasaman Barat",
+    "sector": "AGR",
+    "brand": "SANY",
+    "aplikasi_masuk": "Project Re-Planting kebun sawit",
+    "foto_links": [
+      "https://drive.google.com/open?id=1woHrJx7dVnnZV0pa24M4tZeTj1ZylFki",
+      "https://drive.google.com/open?id=1zcEpCbRbforJNjGEiUJ3WSE9ZTZiuHoZ",
+      "https://drive.google.com/open?id=1zqLG4219E22uNqHApg9qF0PL48NcJh6M",
+      "https://drive.google.com/open?id=1tSJU0iGdh6MM8D0kYcikyflE3I9oHNIj"
+    ],
+    "info_tambahan": "5x New unit SANY SY135F, Milik Kontraktor Re-planting perkebunan sawit"
+  },
+  {
+    "row_id": 14,
+    "lokasi_raw": "PT.BTN (incasi Raya group) - Ujung gading",
+    "lokasi_area": "Pasaman Barat",
+    "sector": "AGR",
+    "brand": "XCMG",
+    "aplikasi_masuk": "Project Re planting perkebunan Sawit PT.BTN",
+    "foto_links": [
+      "https://drive.google.com/open?id=1rGtAi3rBXDYfant52JGV8q-W1eJ4y_uH",
+      "https://drive.google.com/open?id=1iBpllH7Dwx8BnpL2LugtzyFbk0Uyhtyo"
+    ],
+    "info_tambahan": "1x unit XCMG XF135F"
+  },
+  {
+    "row_id": 15,
+    "lokasi_raw": "Ujung gading Pasaman Barat",
+    "lokasi_area": "Pasaman Barat",
+    "sector": "AGR",
+    "brand": "Hitachi",
+    "aplikasi_masuk": "Project Re-Planting perkebunan Sawit PT.BTN (Incasi Raya group)",
+    "foto_links": [
+      "https://drive.google.com/open?id=1bFJwLbBVUKm_7fIismO29evK3JhzFZLl",
+      "https://drive.google.com/open?id=1HyN3og7HW5gSHXPHpCjQsUS_f1yDQIzU",
+      "https://drive.google.com/open?id=1L6ELG9lzYxNhhIZ3Bpr6hEe8xDpHyqSp",
+      "https://drive.google.com/open?id=1l7uj2T0f_DVPy_2b-HrEDAOftzYKpy8q",
+      "https://drive.google.com/open?id=1_3lT5_m3tGeXrHlwcmx307b4N2U5ZpP7"
+    ],
+    "info_tambahan": "7x New Unit ZAXIS 110 MF 5G"
+  },
+  {
+    "row_id": 16,
+    "lokasi_raw": "Sijunjung",
+    "lokasi_area": "Sijunjung",
+    "sector": "CONS",
+    "brand": "Caterpillar",
+    "aplikasi_masuk": "Tambang emas",
+    "foto_links": [
+      "https://drive.google.com/open?id=10TadORIbk8EkUac0ryWspRkmZpRgmzYr"
+    ],
+    "info_tambahan": "Pemilik unit Tn.pun"
+  },
+  {
+    "row_id": 17,
+    "lokasi_raw": "Padang pariaman",
+    "lokasi_area": "Padang Pariaman",
+    "sector": "CONS",
+    "brand": "Sumitomo",
+    "aplikasi_masuk": "Rental",
+    "foto_links": [
+      "https://drive.google.com/open?id=1qUeZ_5asrt4XesMmiP8ISESo9Y8YTEta"
+    ],
+    "info_tambahan": "Pemilik unit Tn.Roby setiadi"
+  },
+  {
+    "row_id": 18,
+    "lokasi_raw": "Solok",
+    "lokasi_area": "Solok",
+    "sector": "CONS",
+    "brand": "Caterpillar",
+    "aplikasi_masuk": "Tambang emas",
+    "foto_links": [
+      "https://drive.google.com/open?id=1HzPrrMBRPPT-wK-5kqai8NAAk5UUEceO"
+    ],
+    "info_tambahan": "Pemilik unit Tn.Teddy"
+  },
+  {
+    "row_id": 19,
+    "lokasi_raw": "Solok",
+    "lokasi_area": "Solok",
+    "sector": "CONS",
+    "brand": "Hitachi",
+    "aplikasi_masuk": "Tambang emas",
+    "foto_links": [
+      "https://drive.google.com/open?id=1UnVYAIfVX7vjtY3CfeBwRLpjzmPMStg6"
+    ],
+    "info_tambahan": "Pemilik unit Tn.pilot"
+  },
+  {
+    "row_id": 20,
+    "lokasi_raw": "Solok selatan",
+    "lokasi_area": "Solok Selatan",
+    "sector": "CONS",
+    "brand": "Hitachi",
+    "aplikasi_masuk": "Rental",
+    "foto_links": [
+      "https://drive.google.com/open?id=1bzq4qC7IflQuMfvYPQ6A6LJaXsHn4gr5"
+    ],
+    "info_tambahan": "Pemilik unit, sekawan kontrindo"
+  },
+  {
+    "row_id": 21,
+    "lokasi_raw": "Pasaman barat",
+    "lokasi_area": "Pasaman Barat",
+    "sector": "CONS",
+    "brand": "Hitachi",
+    "aplikasi_masuk": "Tambang emas",
+    "foto_links": [
+      "https://drive.google.com/open?id=1SYvV1YpaMjEREN0Mz9tthrE-vRfz6QWA"
+    ],
+    "info_tambahan": "Pemilik unit Tn.sapril"
+  },
+  {
+    "row_id": 22,
+    "lokasi_raw": "Kantor pu padang",
+    "lokasi_area": "Padang",
+    "sector": "CONS",
+    "brand": "Sumitomo",
+    "aplikasi_masuk": "Dinas PU",
+    "foto_links": [
+      "https://drive.google.com/open?id=1p_-7_JAunmgNDUzytgHrln4rn0XP5ukV"
+    ],
+    "info_tambahan": "Pemilik unit kana surya lestari"
+  },
+  {
+    "row_id": 23,
+    "lokasi_raw": "Kipek",
+    "lokasi_area": "Solok",
+    "sector": "CONS",
+    "brand": "Caterpillar",
+    "aplikasi_masuk": "Tambang emas",
+    "foto_links": [
+      "https://drive.google.com/open?id=1M7plbomqm_fWcPblsAPkkAGOT0amVudL"
+    ],
+    "info_tambahan": "Pemilik unit Tn.Panji"
+  },
+  {
+    "row_id": 24,
+    "lokasi_raw": "Kipek",
+    "lokasi_area": "Solok",
+    "sector": "CONS",
+    "brand": "Zoomlion",
+    "aplikasi_masuk": "Tambang emas",
+    "foto_links": [
+      "https://drive.google.com/open?id=1h1RjG872OKuuYXas1qFJjr1b33osDT5B"
+    ],
+    "info_tambahan": "Pemilik unit Tn.Nanan"
+  },
+  {
+    "row_id": 25,
+    "lokasi_raw": "Kipek",
+    "lokasi_area": "Solok",
+    "sector": "CONS",
+    "brand": "SANY",
+    "aplikasi_masuk": "Tambang emas",
+    "foto_links": [
+      "https://drive.google.com/open?id=1Geju_woJmv7cdLtAwCeZlXY1yWghsvyc"
+    ],
+    "info_tambahan": "Pemilik unit Tn heri"
+  },
+  {
+    "row_id": 26,
+    "lokasi_raw": "Padang",
+    "lokasi_area": "Padang",
+    "sector": "CONS",
+    "brand": "Kobelco",
+    "aplikasi_masuk": "Harga Oli Kobelco",
+    "foto_links": [
+      "https://drive.google.com/open?id=1Qc5NKA9bdLXBNx_7914LnfEbCNNf3djb"
+    ],
+    "info_tambahan": ""
+  },
+  {
+    "row_id": 27,
+    "lokasi_raw": "Padang",
+    "lokasi_area": "Padang",
+    "sector": "CONS",
+    "brand": "Sany",
+    "aplikasi_masuk": "Padang",
+    "foto_links": [
+      "https://drive.google.com/open?id=1WBixlbdaKILY45SkyRvikK58m0ARWqfw"
+    ],
+    "info_tambahan": "Spesifikasi electrical dump truck sany SYZ324C"
+  },
+  {
+    "row_id": 28,
+    "lokasi_raw": "Padang",
+    "lokasi_area": "Padang",
+    "sector": "CONS",
+    "brand": "Sany",
+    "aplikasi_masuk": "Padang",
+    "foto_links": [
+      "https://drive.google.com/open?id=1ZL31ULiiB3DQ923s7LCpJJg6VRzNM9kF"
+    ],
+    "info_tambahan": "Sany GVW 66 TON"
+  },
+  {
+    "row_id": 29,
+    "lokasi_raw": "Padang",
+    "lokasi_area": "Padang",
+    "sector": "CONS",
+    "brand": "Sany",
+    "aplikasi_masuk": "Padang",
+    "foto_links": [
+      "https://drive.google.com/open?id=1qSwHv5_Mv2kpAVfEMm6tUeVaucehnVkb"
+    ],
+    "info_tambahan": "Spesifikasi Sany 20 ton"
+  },
+  {
+    "row_id": 30,
+    "lokasi_raw": "Padang",
+    "lokasi_area": "Padang",
+    "sector": "CONS",
+    "brand": "Sany",
+    "aplikasi_masuk": "Padang",
+    "foto_links": [
+      "https://drive.google.com/open?id=1T7dSGLSIIfFL4rzuc4eAC0KliA8YQPhN"
+    ],
+    "info_tambahan": "Spesifikasi Sany 16 ton"
+  },
+  {
+    "row_id": 31,
+    "lokasi_raw": "Sicincin",
+    "lokasi_area": "Sicincin",
+    "sector": "CONS",
+    "brand": "Hitachi",
+    "aplikasi_masuk": "Hki",
+    "foto_links": [
+      "https://drive.google.com/open?id=1RoPbFXHbtpTX9bbNF-PgcURolkXtBgp3"
+    ],
+    "info_tambahan": "Pemilik unit\nPT.Ayu kembang"
+  },
+  {
+    "row_id": 32,
+    "lokasi_raw": "Tanjung balik sumiso",
+    "lokasi_area": "Solok",
+    "sector": "CONS",
+    "brand": "Rhino",
+    "aplikasi_masuk": "Tambang emas",
+    "foto_links": [
+      "https://drive.google.com/open?id=1E_LtSbdNpfPqKzeOtzomI7KZx4f2Ogp3"
+    ],
+    "info_tambahan": "Pemilik unit Tn.Rendy"
+  },
+  {
+    "row_id": 33,
+    "lokasi_raw": "Sinamar - Dharmasraya",
+    "lokasi_area": "Dharmasraya",
+    "sector": "MNG",
+    "brand": "Hino",
+    "aplikasi_masuk": "PT. Global Energi Lestari",
+    "foto_links": [
+      "https://drive.google.com/open?id=1BFU5bC7k6QjiHGBxPMVhdhPDyHymOL5m",
+      "https://drive.google.com/open?id=1s72bdN8slscuHpIBBLxnxXDtt9f_w9e0"
+    ],
+    "info_tambahan": "Unit Hino 500 FM 280 JD New diperuntukkan untuk Lube Truck"
+  },
+  {
+    "row_id": 34,
+    "lokasi_raw": "Sinamar - Dharmasraya",
+    "lokasi_area": "Dharmasraya",
+    "sector": "MNG",
+    "brand": "Hino",
+    "aplikasi_masuk": "Hino 500 FM280JD",
+    "foto_links": [
+      "https://drive.google.com/open?id=1ufUD_ixPrL_vrQXXxIk0q0ccSG4cKfV_",
+      "https://drive.google.com/open?id=1FayZd-AWArSa1py6FlSoaS4bBkZV3Csw"
+    ],
+    "info_tambahan": "Unit support water truck"
+  },
+  {
+    "row_id": 35,
+    "lokasi_raw": "Rantau ikil (CK KIM)",
+    "lokasi_area": "Dharmasraya",
+    "sector": "MNG",
+    "brand": "XCMG",
+    "aplikasi_masuk": "CK KIM",
+    "foto_links": [
+      "https://drive.google.com/open?id=1Q4eqCU5ZYLLQH8ohaIvrH0mEumHbA6rR",
+      "https://drive.google.com/open?id=1on9YI0BTzcL3Js4abhNOosC2NmWmJ7oV"
+    ],
+    "info_tambahan": "Truck EV merk XCMG new"
+  },
+  {
+    "row_id": 36,
+    "lokasi_raw": "Padang",
+    "lokasi_area": "Padang",
+    "sector": "MNG",
+    "brand": "Sany",
+    "aplikasi_masuk": "Padang",
+    "foto_links": [
+      "https://drive.google.com/open?id=1xhl6VSo2E3IM8u1I5tkGbzAcAl-ZVATw"
+    ],
+    "info_tambahan": "Harga Oli Pertamina dinpadang"
+  },
+  {
+    "row_id": 37,
+    "lokasi_raw": "Pegambiran",
+    "lokasi_area": "Padang",
+    "sector": "MNG",
+    "brand": "Hyundai",
+    "aplikasi_masuk": "Ke tambang mas, darmasraya",
+    "foto_links": [
+      "https://drive.google.com/open?id=1WwByohQvTtG_9fcp7Ow89C5QQwWOBiou"
+    ],
+    "info_tambahan": "HX210HD dari Hyundai, pembelian dengan nama Marghan Jaya, buyer dr Darmasraya"
+  },
+  {
+    "row_id": 38,
+    "lokasi_raw": "Rantau ikil",
+    "lokasi_area": "Dharmasraya",
+    "sector": "MNG",
+    "brand": "Caterpillar",
+    "aplikasi_masuk": "CK KIM",
+    "foto_links": [
+      "https://drive.google.com/open?id=1L2DmqfQxbRJZjSFY9bq6fanHhzKWHxog"
+    ],
+    "info_tambahan": "Excavator CAT395"
+  },
+  {
+    "row_id": 39,
+    "lokasi_raw": "Kiliran Jau",
+    "lokasi_area": "Sijunjung",
+    "sector": "MNG",
+    "brand": "Hyundai",
+    "aplikasi_masuk": "Unit mengarah ke padang",
+    "foto_links": [
+      "https://drive.google.com/open?id=1rq8H3Fi4UCTR9ikDQo7TE_LYuCIZCZQC"
+    ],
+    "info_tambahan": "Hyundai 20 ton"
+  },
+  {
+    "row_id": 40,
+    "lokasi_raw": "Sijunjung",
+    "lokasi_area": "Sijunjung",
+    "sector": "MNG",
+    "brand": "Sany",
+    "aplikasi_masuk": "Mengarah ke Padang dari sijunjung (berpapasan)",
+    "foto_links": [
+      "https://drive.google.com/open?id=1kQlBPfgDtRmy6VzDyoKdpZyOZID_ydoQ"
+    ],
+    "info_tambahan": "1 kali excavator Sany SY215 mengarah ke Padang, posisi terkini Sijunjung"
+  }
+]
