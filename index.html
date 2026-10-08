@@ -836,14 +836,23 @@
       border-top: var(--neo-border-sm);
     }
 
-    /* Tabs */
+    /* Tabs & Carousel Controls */
     .tab-group {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 10px;
       margin-bottom: 16px;
       border-bottom: var(--neo-border-sm);
       padding-bottom: 10px;
-      overflow-x: auto;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn-wrapper {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
     }
 
     .tab-btn {
@@ -871,6 +880,56 @@
       background: var(--ut-yellow);
       box-shadow: 3px 3px 0 #111827;
       transform: translateY(-2px);
+    }
+
+    /* Swipe hint badge & arrow controls */
+    .carousel-nav-group {
+      display: none;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .swipe-hint-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--ut-yellow);
+      border: var(--neo-border-sm);
+      box-shadow: 2px 2px 0 #111827;
+      padding: 5px 10px;
+      font-weight: 800;
+      font-size: 0.74rem;
+      border-radius: 4px;
+      animation: pulseGlow 2s infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); background: var(--ut-yellow-light); }
+    }
+
+    .carousel-arrow-btn {
+      background: #FFFFFF;
+      border: var(--neo-border-sm);
+      box-shadow: 2px 2px 0 #111827;
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all 0.1s;
+    }
+
+    .carousel-arrow-btn:hover {
+      background: var(--ut-yellow);
+      transform: translate(-1px, -1px);
+    }
+
+    .carousel-arrow-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #111827;
     }
 
     /* Mobile Styles */
@@ -1137,14 +1196,29 @@
         </div>
       </div>
 
-      <!-- View Switcher Tabs -->
+      <!-- View Switcher Tabs & Swipe Controls -->
       <div class="tab-group">
-        <button class="tab-btn active" id="tab-table-view" onclick="switchView('table')">
-          <i data-lucide="table" style="width: 16px; height: 16px;"></i> Mode Tabel Rinci
-        </button>
-        <button class="tab-btn" id="tab-cards-view" onclick="switchView('cards')">
-          <i data-lucide="grid" style="width: 16px; height: 16px;"></i> Mode Kartu & Preview Drive
-        </button>
+        <div class="tab-btn-wrapper">
+          <button class="tab-btn active" id="tab-table-view" onclick="switchView('table')">
+            <i data-lucide="table" style="width: 16px; height: 16px;"></i> Mode Tabel Rinci
+          </button>
+          <button class="tab-btn" id="tab-cards-view" onclick="switchView('cards')">
+            <i data-lucide="grid" style="width: 16px; height: 16px;"></i> Mode Kartu & Preview Drive
+          </button>
+        </div>
+
+        <div class="carousel-nav-group" id="carousel-nav-controls">
+          <div class="swipe-hint-badge">
+            <i data-lucide="hand" style="width: 14px; height: 14px;"></i>
+            <span>Geser Kanan/Kiri ↔ (Auto-Scroll Aktif)</span>
+          </div>
+          <button class="carousel-arrow-btn" onclick="scrollCarousel(-1)" title="Geser ke Kiri">
+            <i data-lucide="chevron-left" style="width: 18px; height: 18px;"></i>
+          </button>
+          <button class="carousel-arrow-btn" onclick="scrollCarousel(1)" title="Geser ke Kanan">
+            <i data-lucide="chevron-right" style="width: 18px; height: 18px;"></i>
+          </button>
+        </div>
       </div>
 
       <!-- Result Counter -->
@@ -1620,25 +1694,81 @@
       applyFilters();
     }
 
+    let autoScrollTimer = null;
+    let isUserInteracting = false;
+
+    function startAutoScroll() {
+      stopAutoScroll();
+      const container = document.getElementById('view-cards-container');
+      if (!container) return;
+
+      autoScrollTimer = setInterval(() => {
+        if (isUserInteracting || activeView !== 'cards') return;
+        
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        if (container.scrollLeft >= maxScroll - 10) {
+          container.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          // Scroll by single card width approx
+          const cardWidth = container.querySelector('.gallery-card')?.clientWidth || 320;
+          container.scrollBy({ left: cardWidth + 14, behavior: 'smooth' });
+        }
+      }, 3500); // Geser perlahan setiap 3.5 detik jika tidak sedang disentuh
+    }
+
+    function stopAutoScroll() {
+      if (autoScrollTimer) {
+        clearInterval(autoScrollTimer);
+        autoScrollTimer = null;
+      }
+    }
+
+    function scrollCarousel(direction) {
+      const container = document.getElementById('view-cards-container');
+      if (!container) return;
+      const cardWidth = container.querySelector('.gallery-card')?.clientWidth || 320;
+      container.scrollBy({ left: direction * (cardWidth + 14), behavior: 'smooth' });
+      
+      // Pause autoscroll briefly on manual click
+      isUserInteracting = true;
+      clearTimeout(window._userInteractTimeout);
+      window._userInteractTimeout = setTimeout(() => { isUserInteracting = false; }, 6000);
+    }
+
     function switchView(view) {
       activeView = view;
       const tblBtn = document.getElementById('tab-table-view');
       const crdBtn = document.getElementById('tab-cards-view');
       const tblContainer = document.getElementById('view-table-container');
       const crdContainer = document.getElementById('view-cards-container');
+      const navControls = document.getElementById('carousel-nav-controls');
 
       if (view === 'table') {
         tblBtn.classList.add('active');
         crdBtn.classList.remove('active');
         tblContainer.style.display = 'block';
         crdContainer.style.display = 'none';
+        if (navControls) navControls.style.display = 'none';
+        stopAutoScroll();
         renderTable();
       } else {
         crdBtn.classList.add('active');
         tblBtn.classList.remove('active');
         tblContainer.style.display = 'none';
         crdContainer.style.display = ''; // let CSS handle grid vs flex on mobile
+        if (navControls) navControls.style.display = 'flex';
         renderCards();
+
+        // Attach touch & mouse interaction listeners to pause auto-scroll
+        crdContainer.addEventListener('touchstart', () => { isUserInteracting = true; }, { passive: true });
+        crdContainer.addEventListener('touchend', () => {
+          clearTimeout(window._userInteractTimeout);
+          window._userInteractTimeout = setTimeout(() => { isUserInteracting = false; }, 5000);
+        }, { passive: true });
+        crdContainer.addEventListener('mouseenter', () => { isUserInteracting = true; });
+        crdContainer.addEventListener('mouseleave', () => { isUserInteracting = false; });
+
+        startAutoScroll();
       }
     }
 
